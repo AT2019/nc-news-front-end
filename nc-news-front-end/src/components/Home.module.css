@@ -1,0 +1,9 @@
+.Home {
+  text-align: center;
+  display: grid;
+  grid-template-rows: 10em 1fr;
+  grid-template-columns: 30em 1fr;
+  grid-template-areas:
+    "header"
+    "topics articles";
+}
