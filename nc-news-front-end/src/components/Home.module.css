@@ -4,6 +4,10 @@
   grid-template-rows: 10em 1fr;
   grid-template-columns: 30em 1fr;
   grid-template-areas:
-    "header"
+    "nav"
     "topics articles";
+}
+
+.Nav {
+  background-color: #282c34;
 }

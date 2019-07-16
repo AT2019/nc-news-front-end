@@ -1,27 +1,25 @@
 import React, { Component } from "react";
 import { getArticles } from "../api.js";
-import axios from "axios";
 import { Link } from "@reach/router";
+import styles from "./Articles.module.css";
 
 class Articles extends Component {
   state = {
     articles: null
   };
   render() {
-    console.log(this.state.articles);
-    console.log("in articles");
     return (
       <div>
-        <h2>Articles</h2>
-        <ul className="list">
+        <ul className={styles.List}>
           {this.state.articles &&
             this.state.articles.map(article => {
-              console.log(article);
               return (
                 <li key={article.article_id}>
-                  <h3>{article.title}</h3>
+                  <Link to={`/articles/${article.article_id}`}>
+                    <h3>{article.title}</h3>
+                  </Link>
                   <p>Author: {article.author}</p>
-                  <Link to={`${article.topic}`}>
+                  <Link to={`/topic/${article.topic}`}>
                     <p>Topic: {article.topic}</p>
                   </Link>
                   <p>Created at: {article.created_at}</p>
@@ -46,7 +44,6 @@ class Articles extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(this.props);
     if (prevProps.topic !== this.props.topic) {
       this.fetchArticles();
     }

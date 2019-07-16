@@ -1,0 +1,11 @@
+.Nav {
+  background-color: #282c34;
+}
+
+.App {
+  display: grid;
+  grid-template-rows: 6em 17em;
+  grid-template-areas:
+    "header"
+    "articles";
+}

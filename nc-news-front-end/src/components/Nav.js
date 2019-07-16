@@ -4,7 +4,7 @@ import NavLink from "./NavLink";
 const Nav = () => {
   return (
     <nav>
-      <NavLink to="/">Home</NavLink>
+      <NavLink to="/">NC-News</NavLink>
     </nav>
   );
 };
