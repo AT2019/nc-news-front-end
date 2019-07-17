@@ -3,6 +3,7 @@ import { getArticleById } from "../api.js";
 import { Link } from "@reach/router";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
+import Voter from "./Voter";
 
 class Article extends React.Component {
   state = {
@@ -22,7 +23,7 @@ class Article extends React.Component {
         <Link to={`/topic/${article.topic}`}>
           <p>Topic: {article.topic}</p>
         </Link>
-        <p>Votes: {article.votes}</p>
+        <Voter votes={article.votes} id={article.article_id} type="article" />
         <Link to={`/articles/${article.article_id}/comments`}>
           <p>Comments: {article.comment_count}</p>
         </Link>

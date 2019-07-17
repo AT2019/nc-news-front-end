@@ -11,17 +11,19 @@ class Voter extends Component {
     if (err) return <p>Something went wrong...</p>;
     return (
       <div>
-        <button onClick={() => this.vote(1)} disabled={voteModifier === 1}>
-          <span role="img" aria-label="thumbs up">
-            👍
-          </span>
-        </button>
-        <p>Votes: {this.props.votes + this.state.voteModifier}</p>
-        <button onClick={() => this.vote(-1)} disabled={voteModifier === -1}>
-          <span role="img" aria-label="thumbs down">
-            👎
-          </span>
-        </button>
+        <p>
+          <button onClick={() => this.vote(1)} disabled={voteModifier === 1}>
+            <span role="img" aria-label="thumbs up">
+              👍
+            </span>
+          </button>
+          Votes: {this.props.votes + this.state.voteModifier}
+          <button onClick={() => this.vote(-1)} disabled={voteModifier === -1}>
+            <span role="img" aria-label="thumbs down">
+              👎
+            </span>
+          </button>
+        </p>
       </div>
     );
   }

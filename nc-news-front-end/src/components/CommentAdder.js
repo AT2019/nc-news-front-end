@@ -14,6 +14,8 @@ class CommentAdder extends Component {
           type="text"
           name="body"
           id="body"
+          minlength="1"
+          required
           value={body}
           onChange={event => this.handleChange(event.target.value, "body")}
         />

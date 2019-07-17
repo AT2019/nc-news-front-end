@@ -4,10 +4,12 @@ import { Link } from "@reach/router";
 import styles from "./Articles.module.css";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
+import Sorter from "./Sorter";
 
 class Articles extends Component {
   state = {
     articles: null,
+    sort: "created_at",
     isLoading: true,
     err: null
   };
@@ -15,8 +17,10 @@ class Articles extends Component {
     const { articles, isLoading, err } = this.state;
     if (err) return <ErrorPage err={err} />;
     if (isLoading) return <Loading text="Articles are loading..." />;
+
     return (
       <div>
+        <Sorter setSort={this.setSort} />
         <ul className={styles.List}>
           {articles &&
             articles.map(article => {
@@ -43,17 +47,26 @@ class Articles extends Component {
   }
 
   fetchArticles() {
-    getArticles(this.props.topic)
+    getArticles(this.props.topic, this.state.sort)
       .then(({ articles }) => this.setState({ articles, isLoading: false }))
       .catch(err => this.setState({ err, isLoading: false }));
   }
+
+  setSort = event => {
+    console.log(event);
+    const { value } = event.target;
+    this.setState({ sort: value });
+  };
 
   componentDidMount() {
     this.fetchArticles();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.topic !== this.props.topic) {
+    if (
+      prevProps.topic !== this.props.topic ||
+      prevState.sort !== this.state.sort
+    ) {
       this.fetchArticles();
     }
   }
