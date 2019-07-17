@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Router } from "@reach/router";
 import styles from "./App.module.css";
 import Nav from "./components/Nav";
@@ -7,22 +7,30 @@ import Articles from "./components/Articles";
 import Article from "./components/Article";
 import Comments from "./components/Comments";
 
-function App() {
-  return (
-    <>
-      <Nav className={styles.Nav} />
-      <div className={styles.App}>
-        <Router>
-          {/* <Home path="/" /> */}
-          <Articles path="/" />
-          <Articles path="/topic/:topic" />
-          <Article path="/articles/:article_id" />
-          <Comments path="/articles/:article_id/comments" />
-          <ErrorPage text="404: Page Not Found" default />
-        </Router>
-      </div>
-    </>
-  );
+class App extends Component {
+  state = {
+    loggedInUser: "jessjelly"
+  };
+  render() {
+    const { loggedInUser } = this.state;
+    return (
+      <>
+        <Nav className={styles.Nav} />
+        <div className={styles.App}>
+          <Router>
+            <Articles loggedInUser={loggedInUser} path="/" />
+            <Articles loggedInUser={loggedInUser} path="/topic/:topic" />
+            <Article loggedInUser={loggedInUser} path="/articles/:article_id" />
+            <Comments
+              loggedInUser={loggedInUser}
+              path="/articles/:article_id/comments"
+            />
+            <ErrorPage text="404: Page Not Found" default />
+          </Router>
+        </div>
+      </>
+    );
+  }
 }
 
 export default App;

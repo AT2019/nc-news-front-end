@@ -31,10 +31,12 @@ class CommentAdder extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { body } = this.state;
-    const { article_id } = this.props;
-    postComment(article_id, { body }).then(newComment => {
-      this.props.addComment(newComment);
-    });
+    const { loggedInUser, article_id } = this.props;
+    postComment(article_id, { body, username: loggedInUser }).then(
+      newComment => {
+        this.props.addComment(newComment);
+      }
+    );
   };
 }
 

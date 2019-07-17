@@ -2,17 +2,24 @@ import React, { Component } from "react";
 import { getArticles } from "../api.js";
 import { Link } from "@reach/router";
 import styles from "./Articles.module.css";
+import Loading from "./Loading";
+import ErrorPage from "./ErrorPage";
 
 class Articles extends Component {
   state = {
-    articles: null
+    articles: null,
+    isLoading: true,
+    err: null
   };
   render() {
+    const { articles, isLoading, err } = this.state;
+    if (err) return <ErrorPage err={err} />;
+    if (isLoading) return <Loading text="Articles are loading..." />;
     return (
       <div>
         <ul className={styles.List}>
-          {this.state.articles &&
-            this.state.articles.map(article => {
+          {articles &&
+            articles.map(article => {
               return (
                 <li key={article.article_id}>
                   <Link to={`/articles/${article.article_id}`}>
@@ -24,7 +31,9 @@ class Articles extends Component {
                   </Link>
                   <p>Created at: {article.created_at}</p>
                   <p>Votes: {article.votes}</p>
-                  <p>Comments: {article.comment_count}</p>
+                  <Link to={`/articles/${article.article_id}/comments`}>
+                    <p>Comments: {article.comment_count}</p>
+                  </Link>
                 </li>
               );
             })}
@@ -34,9 +43,9 @@ class Articles extends Component {
   }
 
   fetchArticles() {
-    getArticles(this.props.topic).then(({ articles }) =>
-      this.setState({ articles })
-    );
+    getArticles(this.props.topic)
+      .then(({ articles }) => this.setState({ articles, isLoading: false }))
+      .catch(err => this.setState({ err, isLoading: false }));
   }
 
   componentDidMount() {

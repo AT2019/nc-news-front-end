@@ -29,7 +29,7 @@ export const getCommentsByArticleId = article_id => {
 
 export const postComment = (article_id, newComment) => {
   console.log(newComment);
-  newComment.username = "jessjelly";
+  //   newComment.username = "jessjelly";
   return axios
     .post(`${baseUrl}/articles/${article_id}/comments`, newComment)
     .then(({ data }) => {
@@ -40,4 +40,8 @@ export const postComment = (article_id, newComment) => {
 
 export const deleteCommentById = id => {
   return axios.delete(`${baseUrl}/comments/${id}`);
+};
+
+export const vote = (type, id, increment) => {
+  return axios.patch(`${baseUrl}/${type}s/${id}`, { inc_votes: increment });
 };

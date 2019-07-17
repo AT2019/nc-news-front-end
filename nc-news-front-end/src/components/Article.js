@@ -1,13 +1,19 @@
 import React from "react";
 import { getArticleById } from "../api.js";
 import { Link } from "@reach/router";
+import Loading from "./Loading";
+import ErrorPage from "./ErrorPage";
 
 class Article extends React.Component {
   state = {
-    article: null
+    article: null,
+    isLoading: true,
+    err: null
   };
   render() {
-    const { article } = this.state;
+    const { article, isLoading, err } = this.state;
+    if (err) return <ErrorPage err={err} />;
+    if (isLoading) return <Loading text="Article is loading..." />;
     return article ? (
       <div>
         <h2>{article.title}</h2>
@@ -25,9 +31,9 @@ class Article extends React.Component {
   }
 
   fetchArticleById() {
-    getArticleById(this.props.article_id).then(({ article }) =>
-      this.setState({ article })
-    );
+    getArticleById(this.props.article_id)
+      .then(({ article }) => this.setState({ article, isLoading: false }))
+      .catch(err => this.setState({ err, isLoading: false }));
   }
 
   componentDidMount() {

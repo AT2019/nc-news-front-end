@@ -1,19 +1,28 @@
 import React, { Component } from "react";
 import { getCommentsByArticleId, deleteCommentById } from "../api.js";
 import CommentAdder from "./CommentAdder";
+import Loading from "./Loading";
+import ErrorPage from "./ErrorPage";
+import Voter from "./Voter";
 
 class Comments extends Component {
   state = {
-    comments: null
+    comments: null,
+    isLoading: true,
+    err: null
   };
   render() {
-    const { comments } = this.state;
+    const { comments, isLoading, err } = this.state;
+    if (err) return <ErrorPage err={err} />;
+    if (isLoading) return <Loading text="Comments are loading..." />;
     return (
       <React.Fragment>
         <CommentAdder
+          loggedInUser={this.props.loggedInUser}
           article_id={this.props.article_id}
           addComment={this.addComment}
         />
+
         <div>
           {comments &&
             comments.map(comment => {
@@ -21,7 +30,11 @@ class Comments extends Component {
                 <li key={comment.comment_id}>
                   <p>{comment.author}</p>
                   <p>{comment.body}</p>
-                  <p>Votes: {comment.votes}</p>
+                  <Voter
+                    votes={comment.votes}
+                    id={comment.comment_id}
+                    type="comment"
+                  />
                   <button
                     onClick={() => this.deleteComment(comment.comment_id)}
                   >
@@ -35,9 +48,11 @@ class Comments extends Component {
     );
   }
   fetchCommentsByArticleId() {
-    getCommentsByArticleId(this.props.article_id).then(({ comments }) =>
-      this.setState({ comments })
-    );
+    getCommentsByArticleId(this.props.article_id)
+      .then(({ comments }) => this.setState({ comments, isLoading: false }))
+      .catch(err => {
+        this.setState({ err, isLoading: false });
+      });
   }
   componentDidMount() {
     this.fetchCommentsByArticleId(this.props.article_id);
