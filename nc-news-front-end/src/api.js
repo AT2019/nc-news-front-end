@@ -23,7 +23,21 @@ export const getCommentsByArticleId = article_id => {
   return axios
     .get(`${baseUrl}/articles/${article_id}/comments`, [])
     .then(({ data }) => {
-      console.log(data);
       return data;
     });
+};
+
+export const postComment = (article_id, newComment) => {
+  console.log(newComment);
+  newComment.username = "jessjelly";
+  return axios
+    .post(`${baseUrl}/articles/${article_id}/comments`, newComment)
+    .then(({ data }) => {
+      return data.comment;
+    })
+    .catch(err => console.log(err));
+};
+
+export const deleteCommentById = id => {
+  return axios.delete(`${baseUrl}/comments/${id}`);
 };

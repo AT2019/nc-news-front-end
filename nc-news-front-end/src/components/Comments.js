@@ -1,25 +1,37 @@
 import React, { Component } from "react";
-import { getCommentsByArticleId } from "../api.js";
+import { getCommentsByArticleId, deleteCommentById } from "../api.js";
+import CommentAdder from "./CommentAdder";
 
 class Comments extends Component {
   state = {
     comments: null
   };
   render() {
-    console.log(this.props);
+    const { comments } = this.state;
     return (
-      <div>
-        {this.state.comments &&
-          this.state.comments.map(comment => {
-            return (
-              <li key={comment.comment_id}>
-                <p>{comment.author}</p>
-                <p>{comment.body}</p>
-                <p>Votes: {comment.votes}</p>
-              </li>
-            );
-          })}
-      </div>
+      <React.Fragment>
+        <CommentAdder
+          article_id={this.props.article_id}
+          addComment={this.addComment}
+        />
+        <div>
+          {comments &&
+            comments.map(comment => {
+              return (
+                <li key={comment.comment_id}>
+                  <p>{comment.author}</p>
+                  <p>{comment.body}</p>
+                  <p>Votes: {comment.votes}</p>
+                  <button
+                    onClick={() => this.deleteComment(comment.comment_id)}
+                  >
+                    Delete
+                  </button>
+                </li>
+              );
+            })}
+        </div>
+      </React.Fragment>
     );
   }
   fetchCommentsByArticleId() {
@@ -28,7 +40,6 @@ class Comments extends Component {
     );
   }
   componentDidMount() {
-    console.log(this.props.article_id);
     this.fetchCommentsByArticleId(this.props.article_id);
   }
 
@@ -37,6 +48,26 @@ class Comments extends Component {
       this.fetchCommentsByArticleId();
     }
   }
+
+  addComment = newComment => {
+    this.setState(state => {
+      return { comments: [newComment, ...state.comments] };
+    });
+  };
+
+  deleteComment = id => {
+    deleteCommentById(id)
+      .then(() => {
+        this.setState(({ comments }) => {
+          return {
+            comments: comments.filter(comment => comment.comment_id !== id)
+          };
+        });
+      })
+      .catch(err => {
+        this.setState({ err });
+      });
+  };
 }
 
 export default Comments;

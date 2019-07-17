@@ -23,6 +23,7 @@ class Article extends React.Component {
       </div>
     ) : null;
   }
+
   fetchArticleById() {
     getArticleById(this.props.article_id).then(({ article }) =>
       this.setState({ article })
