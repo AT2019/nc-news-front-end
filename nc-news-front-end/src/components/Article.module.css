@@ -1,18 +1,7 @@
-.BodyLink {
-  text-decoration: none;
-  color: black;
-}
-
-.Link {
-  color: #1e2124;
-}
-
-.List {
-  list-style-type: none;
-}
-
-.ListItem {
+.Div {
   border-style: solid;
+  text-align: justify;
+  margin-top: 10px;
   margin-bottom: 10px;
   margin-right: 15px;
   margin-left: 10px;
@@ -21,9 +10,14 @@
   font-family: Georgia, serif;
 }
 
-.Text {
+.Link {
+  color: #1e2124;
+}
+
+.Ptag {
   margin-left: 10px;
   margin-right: 10px;
-  margin-bottom: 5px;
-  text-align: justify;
+}
+.Title {
+  margin-left: 10px;
 }

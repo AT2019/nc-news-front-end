@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { postComment } from "../api";
+import styles from "./CommentAdder.module.css";
 
 class CommentAdder extends Component {
   state = {
@@ -8,18 +9,21 @@ class CommentAdder extends Component {
   render() {
     const { body } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlFor="body">Post Comment</label>
+      <form className={styles.Form} onSubmit={this.handleSubmit}>
+        <label className={styles.Label} htmlFor="body">
+          Add Your Comment Here....
+        </label>
         <input
+          className={styles.Input}
           type="text"
           name="body"
           id="body"
-          minlength="1"
+          minLength="1"
           required
           value={body}
           onChange={event => this.handleChange(event.target.value, "body")}
         />
-        <button>+</button>
+        <button className={styles.Button}>+</button>
       </form>
     );
   }

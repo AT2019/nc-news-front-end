@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Router } from "@reach/router";
-import styles from "./App.module.css";
+// import styles from "./App.module.css";
+import styles from "./App.css";
 import Nav from "./components/Nav";
 import ErrorPage from "./components/ErrorPage";
 import Articles from "./components/Articles";

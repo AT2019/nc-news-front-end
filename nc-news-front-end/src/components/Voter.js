@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { vote } from "../api";
+import styles from "./Voter.module.css";
 
 class Voter extends Component {
   state = {
@@ -12,13 +13,21 @@ class Voter extends Component {
     return (
       <div>
         <p>
-          <button onClick={() => this.vote(1)} disabled={voteModifier === 1}>
+          <button
+            className={styles.Ptag}
+            onClick={() => this.vote(1)}
+            disabled={voteModifier === 1}
+          >
             <span role="img" aria-label="thumbs up">
               👍
             </span>
           </button>
           Votes: {this.props.votes + this.state.voteModifier}
-          <button onClick={() => this.vote(-1)} disabled={voteModifier === -1}>
+          <button
+            className={styles.Ptag}
+            onClick={() => this.vote(-1)}
+            disabled={voteModifier === -1}
+          >
             <span role="img" aria-label="thumbs down">
               👎
             </span>

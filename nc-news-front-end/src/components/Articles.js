@@ -1,15 +1,19 @@
 import React, { Component } from "react";
+import articleBody from "../utils/articleBody";
 import { getArticles } from "../api.js";
 import { Link } from "@reach/router";
 import styles from "./Articles.module.css";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
 import Sorter from "./Sorter";
+import Orderer from "./Orderer";
+import formatDateAppearance from "../utils/formatDateAppearance";
 
 class Articles extends Component {
   state = {
     articles: null,
     sort: "created_at",
+    order: "desc",
     isLoading: true,
     err: null
   };
@@ -21,22 +25,43 @@ class Articles extends Component {
     return (
       <div>
         <Sorter setSort={this.setSort} />
+        <Orderer setOrder={this.setOrder} />
         <ul className={styles.List}>
           {articles &&
             articles.map(article => {
               return (
-                <li key={article.article_id}>
-                  <Link to={`/articles/${article.article_id}`}>
-                    <h3>{article.title}</h3>
+                <li key={article.article_id} className={styles.ListItem}>
+                  <Link
+                    className={styles.Link}
+                    to={`/articles/${article.article_id}`}
+                  >
+                    <h3 className={styles.Text}>{article.title}</h3>
                   </Link>
-                  <p>Author: {article.author}</p>
-                  <Link to={`/topic/${article.topic}`}>
-                    <p>Topic: {article.topic}</p>
+                  <Link
+                    className={styles.BodyLink}
+                    to={`/articles/${article.article_id}`}
+                  >
+                    <p className={styles.Text}>
+                      {articleBody(article.body)}...click here to read more
+                    </p>
                   </Link>
-                  <p>Created at: {article.created_at}</p>
-                  <p>Votes: {article.votes}</p>
-                  <Link to={`/articles/${article.article_id}/comments`}>
-                    <p>Comments: {article.comment_count}</p>
+                  <p className={styles.Text}>Author: {article.author}</p>
+                  <Link className={styles.Link} to={`/topic/${article.topic}`}>
+                    <p className={styles.Text}>
+                      Click here for more articles on... {article.topic}
+                    </p>
+                  </Link>
+                  <p className={styles.Text}>
+                    Created at: {formatDateAppearance(article.created_at)}
+                  </p>
+                  <p className={styles.Text}>Votes: {article.votes}</p>
+                  <Link
+                    className={styles.Link}
+                    to={`/articles/${article.article_id}/comments`}
+                  >
+                    <p className={styles.Text}>
+                      Comments: {article.comment_count}
+                    </p>
                   </Link>
                 </li>
               );
@@ -46,16 +71,28 @@ class Articles extends Component {
     );
   }
 
-  fetchArticles() {
-    getArticles(this.props.topic, this.state.sort)
+  fetchArticles = () => {
+    getArticles(this.props.topic, this.state.sort, this.state.order)
       .then(({ articles }) => this.setState({ articles, isLoading: false }))
       .catch(err => this.setState({ err, isLoading: false }));
-  }
+  };
 
   setSort = event => {
-    console.log(event);
     const { value } = event.target;
     this.setState({ sort: value });
+  };
+
+  setOrder = event => {
+    const { value } = event.target;
+    if (value === "desc") {
+      this.setState({
+        order: "asc"
+      });
+    } else {
+      this.setState({
+        order: "desc"
+      });
+    }
   };
 
   componentDidMount() {
@@ -65,7 +102,8 @@ class Articles extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (
       prevProps.topic !== this.props.topic ||
-      prevState.sort !== this.state.sort
+      prevState.sort !== this.state.sort ||
+      prevState.order !== this.state.order
     ) {
       this.fetchArticles();
     }

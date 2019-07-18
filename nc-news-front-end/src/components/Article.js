@@ -4,6 +4,7 @@ import { Link } from "@reach/router";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
 import Voter from "./Voter";
+import styles from "./Article.module.css";
 
 class Article extends React.Component {
   state = {
@@ -16,26 +17,36 @@ class Article extends React.Component {
     if (err) return <ErrorPage err={err} />;
     if (isLoading) return <Loading text="Article is loading..." />;
     return article ? (
-      <div>
-        <h2>{article.title}</h2>
-        <p>Author: {article.author}</p>
-        <p>{article.body}</p>
-        <Link to={`/topic/${article.topic}`}>
-          <p>Topic: {article.topic}</p>
+      <div className={styles.Div}>
+        <h2 className={styles.Title}>{article.title}</h2>
+        <p className={styles.Ptag}>Author: {article.author}</p>
+        <p className={styles.Ptag}>{article.body}</p>
+        <Link className={styles.Link} to={`/topic/${article.topic}`}>
+          <p className={styles.Ptag}>
+            Click here for more articles on... {article.topic}
+          </p>
         </Link>
-        <Voter votes={article.votes} id={article.article_id} type="article" />
-        <Link to={`/articles/${article.article_id}/comments`}>
-          <p>Comments: {article.comment_count}</p>
+        <Voter
+          className={styles.Ptag}
+          votes={article.votes}
+          id={article.article_id}
+          type="article"
+        />
+        <Link
+          className={styles.Link}
+          to={`/articles/${article.article_id}/comments`}
+        >
+          <p className={styles.Ptag}>Comments: {article.comment_count}</p>
         </Link>
       </div>
     ) : null;
   }
 
-  fetchArticleById() {
+  fetchArticleById = () => {
     getArticleById(this.props.article_id)
       .then(({ article }) => this.setState({ article, isLoading: false }))
       .catch(err => this.setState({ err, isLoading: false }));
-  }
+  };
 
   componentDidMount() {
     this.fetchArticleById(this.props.id);

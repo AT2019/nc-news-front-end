@@ -1,0 +1,49 @@
+.Button {
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: black;
+  margin-top: 3px;
+  margin-bottom: 4px;
+  margin-left: 4px;
+  margin-right: 4px;
+  height: 30px;
+  width: 3%;
+  text-align: center;
+}
+
+.Form {
+  margin-top: 10px;
+  margin-left: 5px;
+  font-size: 16px;
+  font-style: bold;
+  font-family: Georgia, serif;
+  background: #afbde8;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 3px;
+  border-color: black;
+  width: 97%;
+  height: 60px;
+}
+
+.Input {
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: black;
+  margin-top: 3px;
+  margin-bottom: 4px;
+  margin-left: 4px;
+  margin-right: 4px;
+  width: 42%;
+  height: 50px;
+}
+
+.Label {
+  margin-top: 3px;
+  margin-bottom: 4px;
+  margin-left: 10px;
+  margin-right: 4px;
+  width: 15%;
+}

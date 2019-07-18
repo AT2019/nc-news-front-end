@@ -4,6 +4,7 @@ import CommentAdder from "./CommentAdder";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
 import Voter from "./Voter";
+import styles from "./Comments.module.css";
 
 class Comments extends Component {
   state = {
@@ -27,33 +28,36 @@ class Comments extends Component {
           {comments &&
             comments.map(comment => {
               return (
-                <li key={comment.comment_id}>
-                  <p>{comment.author}</p>
-                  <p>{comment.body}</p>
-                  <Voter
-                    votes={comment.votes}
-                    id={comment.comment_id}
-                    type="comment"
-                  />
-                  <button
-                    onClick={() => this.deleteComment(comment.comment_id)}
-                  >
-                    Delete
-                  </button>
-                </li>
+                <ul key={comment.comment_id} className={styles.ListItem}>
+                  <li>
+                    <p className={styles.Ptag}>Posted by: {comment.author}</p>
+                    <p className={styles.Ptag}>{comment.body}</p>
+                    <Voter
+                      votes={comment.votes}
+                      id={comment.comment_id}
+                      type="comment"
+                    />
+                    <button
+                      className={styles.Button}
+                      onClick={() => this.deleteComment(comment.comment_id)}
+                    >
+                      Delete My Comment
+                    </button>
+                  </li>
+                </ul>
               );
             })}
         </div>
       </React.Fragment>
     );
   }
-  fetchCommentsByArticleId() {
+  fetchCommentsByArticleId = () => {
     getCommentsByArticleId(this.props.article_id)
       .then(({ comments }) => this.setState({ comments, isLoading: false }))
       .catch(err => {
         this.setState({ err, isLoading: false });
       });
-  }
+  };
   componentDidMount() {
     this.fetchCommentsByArticleId(this.props.article_id);
   }

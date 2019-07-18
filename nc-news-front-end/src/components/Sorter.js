@@ -1,12 +1,12 @@
 import React from "react";
+import styles from "./Sorter.module.css";
 
 const Sorter = ({ setSort }) => {
-  console.log("in Sorter");
   return (
-    <select onChange={setSort}>
+    <select className={styles.Select} onChange={setSort}>
       <option value="created_at">Date</option>
-      <option value="comment_count">Most Talked About</option>
-      <option value="votes">Most Popular</option>
+      <option value="comment_count">Comments</option>
+      <option value="votes">Votes</option>
     </select>
   );
 };
