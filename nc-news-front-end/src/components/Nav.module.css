@@ -1,7 +1,28 @@
+.Button {
+  font-size: 16px;
+  font-style: bold;
+  font-family: Georgia, serif;
+  background: white;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 3px;
+  border-color: black;
+  margin-right: 10px;
+  width: 90px;
+  height: 40px;
+  overflow: auto;
+  float: right;
+  margin-top: 10px;
+}
+
 .Nav {
   background: #b9bbbe;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .Logo {
   height: 10vmin;
+  border: none;
 }

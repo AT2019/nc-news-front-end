@@ -16,7 +16,7 @@ class App extends Component {
     const { loggedInUser } = this.state;
     return (
       <>
-        <Nav className={styles.Nav} />
+        <Nav />
         <div className={styles.App}>
           <Router>
             <Articles loggedInUser={loggedInUser} path="/" />

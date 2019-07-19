@@ -21,6 +21,10 @@
   font-family: Georgia, serif;
 }
 
+.MainDivContainer {
+  margin-top: 5em;
+}
+
 .Text {
   margin-left: 10px;
   margin-right: 10px;

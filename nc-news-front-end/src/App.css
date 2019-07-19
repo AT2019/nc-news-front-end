@@ -35,7 +35,7 @@
   border-radius: 50%;
   border: 1em solid lightgrey;
   border-top: 1em solid grey;
-  animation: spin 2s ease infinite;
+  animation: spin 1s ease infinite;
 }
 
 @keyframes App-logo-spin {

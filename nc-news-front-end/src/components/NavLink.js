@@ -9,7 +9,7 @@ const NavLink = props => {
       getProps={({ isCurrent }) => {
         return {
           style: {
-            borderBottom: isCurrent ? "4px solid white" : "0"
+            borderBottom: "0"
           }
         };
       }}

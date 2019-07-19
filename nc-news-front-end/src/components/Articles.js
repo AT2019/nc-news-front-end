@@ -23,9 +23,10 @@ class Articles extends Component {
     if (isLoading) return <Loading text="Articles are loading..." />;
 
     return (
-      <div>
+      <div className={styles.MainDivContainer}>
         <Sorter setSort={this.setSort} />
         <Orderer setOrder={this.setOrder} />
+
         <ul className={styles.List}>
           {articles &&
             articles.map(article => {
