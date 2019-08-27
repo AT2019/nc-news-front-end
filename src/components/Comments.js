@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { getCommentsByArticleId, deleteCommentById } from "../api.js";
 import CommentAdder from "./CommentAdder";
+import CommentCard from "./CommentCard";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
-import Voter from "./Voter";
-import styles from "./Comments.module.css";
 
 class Comments extends Component {
   state = {
@@ -26,28 +25,7 @@ class Comments extends Component {
         <div>
           {comments &&
             comments.map(comment => {
-              return (
-                <ul key={comment.comment_id} className={styles.CommentListItem}>
-                  <li>
-                    <p className={styles.Ptag}>Posted by: {comment.author}</p>
-                    <p className={styles.Ptag}>{comment.body}</p>
-                    <Voter
-                      votes={comment.votes}
-                      id={comment.comment_id}
-                      type="comment"
-                    />
-                    {this.props.loggedInUser === comment.author && (
-                      <button
-                        type="button"
-                        className={styles.Button}
-                        onClick={() => this.deleteComment(comment.comment_id)}
-                      >
-                        Delete My Comment
-                      </button>
-                    )}
-                  </li>
-                </ul>
-              );
+              return <CommentCard key={comment.id} comment={comment} />;
             })}
         </div>
       </React.Fragment>
