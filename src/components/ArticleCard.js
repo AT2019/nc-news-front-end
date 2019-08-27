@@ -4,7 +4,7 @@ import styles from "./Articles.module.css";
 import articleBody from "../utils/articleBody";
 import formatDateAppearance from "../utils/formatDateAppearance";
 
-const ArticleCard = ({ article }) => {
+const ArticleCard = ({ article, loggedInUser }) => {
   return (
     <div>
       <li className={styles.ListItem}>
@@ -34,7 +34,7 @@ const ArticleCard = ({ article }) => {
         <p className={styles.Text}>Votes: {article.votes}</p>
         <p className={styles.Text}>Comments: {article.comment_count}</p>
 
-        {this.props.loggedInUser === article.author && (
+        {loggedInUser === article.author && (
           <button
             type="button"
             onClick={() => this.deleteArticle(article.article_id)}
@@ -43,7 +43,6 @@ const ArticleCard = ({ article }) => {
           </button>
         )}
       </li>
-      );
     </div>
   );
 };

@@ -25,7 +25,13 @@ class Comments extends Component {
         <div>
           {comments &&
             comments.map(comment => {
-              return <CommentCard key={comment.id} comment={comment} />;
+              return (
+                <CommentCard
+                  key={comment.id}
+                  comment={comment}
+                  loggedInUser={this.props.loggedInUser}
+                />
+              );
             })}
         </div>
       </React.Fragment>
