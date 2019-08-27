@@ -23,7 +23,7 @@ class CommentAdder extends Component {
           value={body}
           onChange={event => this.handleChange(event.target.value, "body")}
         />
-        <button className={styles.Button}>+</button>
+        <button className={styles.CommentButton}>+</button>
       </form>
     );
   }

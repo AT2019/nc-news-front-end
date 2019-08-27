@@ -3,7 +3,6 @@ import axios from "axios";
 const baseUrl = "https://nc-newsorama.herokuapp.com/api";
 
 export const getArticles = (topic, sort_by, order) => {
-  //   const params = { topic: topic, sort_by: sort_by };
   return axios
     .get(`${baseUrl}/articles`, {
       params: {
@@ -18,23 +17,20 @@ export const getArticles = (topic, sort_by, order) => {
 };
 
 export const getArticleById = article_id => {
-  return axios.get(`${baseUrl}/articles/${article_id}`, {}).then(({ data }) => {
-    console.log(data);
+  return axios.get(`${baseUrl}/articles/${article_id}`).then(({ data }) => {
     return data;
   });
 };
 
 export const getCommentsByArticleId = article_id => {
   return axios
-    .get(`${baseUrl}/articles/${article_id}/comments`, [])
+    .get(`${baseUrl}/articles/${article_id}/comments`)
     .then(({ data }) => {
       return data;
     });
 };
 
 export const postComment = (article_id, newComment) => {
-  console.log(newComment);
-  //   newComment.username = "jessjelly";
   return axios
     .post(`${baseUrl}/articles/${article_id}/comments`, newComment)
     .then(({ data }) => {
@@ -49,4 +45,17 @@ export const deleteCommentById = id => {
 
 export const vote = (type, id, increment) => {
   return axios.patch(`${baseUrl}/${type}s/${id}`, { inc_votes: increment });
+};
+
+export const postArticle = data => {
+  return axios
+    .post(`${baseUrl}/articles`, data)
+    .then(({ data }) => {
+      return data.article;
+    })
+    .catch(err => console.log(err));
+};
+
+export const deleteArticleById = article_id => {
+  return axios.delete(`${baseUrl}/articles/${article_id}`);
 };

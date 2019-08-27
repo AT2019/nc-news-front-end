@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import articleBody from "../utils/articleBody";
-import { getArticles } from "../api.js";
+import { getArticles, deleteArticleById } from "../api.js";
 import { Link } from "@reach/router";
 import styles from "./Articles.module.css";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
 import Sorter from "./Sorter";
 import Orderer from "./Orderer";
+import ArticleAdder from "./ArticleAdder";
 import formatDateAppearance from "../utils/formatDateAppearance";
 
 class Articles extends Component {
@@ -26,7 +27,10 @@ class Articles extends Component {
       <div className={styles.MainDivContainer}>
         <Sorter setSort={this.setSort} />
         <Orderer setOrder={this.setOrder} />
-
+        <ArticleAdder
+          author={this.props.loggedInUser}
+          setNewArticle={this.setNewArticle}
+        />
         <ul className={styles.List}>
           {articles &&
             articles.map(article => {
@@ -56,14 +60,18 @@ class Articles extends Component {
                     Created at: {formatDateAppearance(article.created_at)}
                   </p>
                   <p className={styles.Text}>Votes: {article.votes}</p>
-                  <Link
-                    className={styles.Link}
-                    to={`/articles/${article.article_id}/comments`}
-                  >
-                    <p className={styles.Text}>
-                      Comments: {article.comment_count}
-                    </p>
-                  </Link>
+                  <p className={styles.Text}>
+                    Comments: {article.comment_count}
+                  </p>
+
+                  {this.props.loggedInUser === article.author && (
+                    <button
+                      type="button"
+                      onClick={() => this.deleteArticle(article.article_id)}
+                    >
+                      Delete My Article
+                    </button>
+                  )}
                 </li>
               );
             })}
@@ -94,6 +102,26 @@ class Articles extends Component {
         order: "desc"
       });
     }
+  };
+
+  setNewArticle = article => {
+    this.setState({
+      articles: [article, ...this.state.articles]
+    });
+  };
+
+  deleteArticle = id => {
+    deleteArticleById(id)
+      .then(() => {
+        this.setState(({ articles }) => {
+          return {
+            articles: articles.filter(article => article.article_id !== id)
+          };
+        });
+      })
+      .catch(err => {
+        this.setState({ err });
+      });
   };
 
   componentDidMount() {

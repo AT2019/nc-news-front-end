@@ -5,6 +5,7 @@ import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
 import Voter from "./Voter";
 import styles from "./Article.module.css";
+import Comments from "./Comments";
 
 class Article extends React.Component {
   state = {
@@ -32,12 +33,12 @@ class Article extends React.Component {
           id={article.article_id}
           type="article"
         />
-        <Link
-          className={styles.Link}
-          to={`/articles/${article.article_id}/comments`}
-        >
-          <p className={styles.Ptag}>Comments: {article.comment_count}</p>
-        </Link>
+        <p className={styles.Ptag}>Comments: {article.comment_count}</p>
+
+        <Comments
+          loggedInUser={this.props.loggedInUser}
+          article_id={this.props.article_id}
+        />
       </div>
     ) : null;
   }

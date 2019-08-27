@@ -7,7 +7,7 @@
   margin-bottom: 10px;
 }
 
-.ListItem {
+.CommentListItem {
   list-style-type: none;
   border-style: solid;
   border-radius: 5px;
@@ -23,4 +23,11 @@
   margin-right: 10px;
   margin-bottom: 10px;
   text-align: justify;
+}
+
+@media only screen and (max-width: 768px) {
+  [class*="CommentListItem"] {
+    overflow: auto;
+    width: 86%;
+  }
 }

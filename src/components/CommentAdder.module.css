@@ -1,4 +1,4 @@
-.Button {
+.CommentButton {
   border-style: solid;
   border-radius: 5px;
   border-width: 1px;
@@ -13,7 +13,7 @@
 }
 
 .Form {
-  margin-top: 5em;
+  margin-top: 3em;
   margin-left: 5px;
   font-size: 16px;
   font-style: bold;
@@ -45,5 +45,19 @@
   margin-bottom: 4px;
   margin-left: 10px;
   margin-right: 4px;
-  width: 15%;
+  /* width: 15%; */
+}
+
+@media only screen and (max-width: 768px) {
+  [class*="Form"] {
+    width: 95%;
+    height: auto;
+    margin-top: 190px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  [class*="CommentButton"] {
+    overflow: auto;
+  }
 }

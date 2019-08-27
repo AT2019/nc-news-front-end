@@ -23,12 +23,11 @@ class Comments extends Component {
           article_id={this.props.article_id}
           addComment={this.addComment}
         />
-
         <div>
           {comments &&
             comments.map(comment => {
               return (
-                <ul key={comment.comment_id} className={styles.ListItem}>
+                <ul key={comment.comment_id} className={styles.CommentListItem}>
                   <li>
                     <p className={styles.Ptag}>Posted by: {comment.author}</p>
                     <p className={styles.Ptag}>{comment.body}</p>
@@ -37,12 +36,15 @@ class Comments extends Component {
                       id={comment.comment_id}
                       type="comment"
                     />
-                    <button
-                      className={styles.Button}
-                      onClick={() => this.deleteComment(comment.comment_id)}
-                    >
-                      Delete My Comment
-                    </button>
+                    {this.props.loggedInUser === comment.author && (
+                      <button
+                        type="button"
+                        className={styles.Button}
+                        onClick={() => this.deleteComment(comment.comment_id)}
+                      >
+                        Delete My Comment
+                      </button>
+                    )}
                   </li>
                 </ul>
               );

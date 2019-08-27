@@ -8,8 +8,9 @@
   border-width: 3px;
   border-color: black;
   margin-right: 10px;
-  width: 90px;
-  height: 40px;
+  margin-left: 10px;
+  width: 120px;
+  height: 45px;
   overflow: auto;
   float: right;
   margin-top: 10px;
@@ -20,9 +21,24 @@
   position: fixed;
   top: 0;
   width: 100%;
+  overflow: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  [class*="Button"] {
+    width: 95%;
+    margin-bottom: 10px;
+  }
 }
 
 .Logo {
   height: 10vmin;
   border: none;
+}
+
+.Ptag {
+  font-size: 16px;
+  font-style: bold;
+  font-family: Georgia, serif;
+  display: inline;
 }
