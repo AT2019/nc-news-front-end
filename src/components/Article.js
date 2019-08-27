@@ -21,6 +21,9 @@ class Article extends React.Component {
       <div className={styles.Div}>
         <h2 className={styles.Title}>{article.title}</h2>
         <p className={styles.Ptag}>Author: {article.author}</p>
+        <Link className={styles.Link} to={`/authors/${article.author}`}>
+          <p className={styles.Text}>Read more articles by {article.author}</p>
+        </Link>
         <p className={styles.Ptag}>{article.body}</p>
         <Link className={styles.Link} to={`/topic/${article.topic}`}>
           <p className={styles.Ptag}>

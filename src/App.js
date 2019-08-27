@@ -20,6 +20,11 @@ class App extends Component {
           <Router>
             <Articles loggedInUser={loggedInUser} path="/" />
             <Articles loggedInUser={loggedInUser} path="/topic/:topic" />
+            <Articles
+              loggedInUser={loggedInUser}
+              author={this.props.author}
+              path="/authors/:author"
+            />
             <Article loggedInUser={loggedInUser} path="/articles/:article_id" />
             <ArticleAdder loggedInUser={loggedInUser} path="/articles" />
             <ErrorPage text="404: Page Not Found" default />

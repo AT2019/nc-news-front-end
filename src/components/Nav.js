@@ -9,7 +9,6 @@ const Nav = () => {
       <Link to="/">
         <img className={styles.Logo} src={Logo} alt="NC News Logo" />
       </Link>
-
       <Link to="/topic/cooking">
         <button className={styles.Button}>Cooking</button>
       </Link>

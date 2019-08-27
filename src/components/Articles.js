@@ -51,6 +51,14 @@ class Articles extends Component {
                     </p>
                   </Link>
                   <p className={styles.Text}>Author: {article.author}</p>
+                  <Link
+                    className={styles.Link}
+                    to={`/authors/${article.author}`}
+                  >
+                    <p className={styles.Text}>
+                      Read more articles by {article.author}
+                    </p>
+                  </Link>
                   <Link className={styles.Link} to={`/topic/${article.topic}`}>
                     <p className={styles.Text}>
                       Click here for more articles on... {article.topic}
@@ -81,7 +89,12 @@ class Articles extends Component {
   }
 
   fetchArticles = () => {
-    getArticles(this.props.topic, this.state.sort, this.state.order)
+    getArticles(
+      this.props.author,
+      this.props.topic,
+      this.state.sort,
+      this.state.order
+    )
       .then(({ articles }) => this.setState({ articles, isLoading: false }))
       .catch(err => this.setState({ err, isLoading: false }));
   };
@@ -130,6 +143,7 @@ class Articles extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (
+      prevProps.author !== this.props.author ||
       prevProps.topic !== this.props.topic ||
       prevState.sort !== this.state.sort ||
       prevState.order !== this.state.order
