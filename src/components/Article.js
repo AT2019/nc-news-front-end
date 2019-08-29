@@ -6,6 +6,7 @@ import ErrorPage from "./ErrorPage";
 import Voter from "./Voter";
 import styles from "./Article.module.css";
 import Comments from "./Comments";
+import ArticleAdder from "./ArticleAdder.js";
 
 class Article extends React.Component {
   state = {
@@ -18,26 +19,29 @@ class Article extends React.Component {
     if (err) return <ErrorPage err={err} />;
     if (isLoading) return <Loading text="Article is loading..." />;
     return article ? (
-      <div className={styles.Div}>
-        <h2 className={styles.Title}>{article.title}</h2>
-        <p className={styles.Ptag}>Author: {article.author}</p>
-        <Link className={styles.Link} to={`/authors/${article.author}`}>
-          <p className={styles.Text}>Read more articles by {article.author}</p>
-        </Link>
-        <p className={styles.Ptag}>{article.body}</p>
-        <Link className={styles.Link} to={`/topic/${article.topic}`}>
-          <p className={styles.Ptag}>
-            Click here for more articles on... {article.topic}
-          </p>
-        </Link>
-        <Voter
-          className={styles.Ptag}
-          votes={article.votes}
-          id={article.article_id}
-          type="article"
-        />
-        <p className={styles.Ptag}>Comments: {article.comment_count}</p>
-
+      <div>
+        <div className={styles.Div}>
+          <h2 className={styles.Title}>{article.title}</h2>
+          <p className={styles.Ptag}>Author: {article.author}</p>
+          <Link to={`/authors/${article.author}`}>
+            <p className={styles.Ptag}>
+              Read more articles by {article.author}
+            </p>
+          </Link>
+          <p className={styles.Ptag}>{article.body}</p>
+          <Link className={styles.Link} to={`/topic/${article.topic}`}>
+            <p className={styles.Ptag}>
+              Click here for more articles on... {article.topic}
+            </p>
+          </Link>
+          <Voter
+            className={styles.Voter}
+            votes={article.votes}
+            id={article.article_id}
+            type="article"
+          />
+          <p className={styles.Ptag}>Comments: {article.comment_count}</p>
+        </div>
         <Comments
           loggedInUser={this.props.loggedInUser}
           article_id={this.props.article_id}

@@ -8,13 +8,14 @@
   margin-left: 4px;
   margin-right: 4px;
   height: 30px;
-  width: 3%;
+  width: 10%;
   text-align: center;
 }
 
 .Form {
-  margin-top: 3em;
-  margin-left: 5px;
+  margin-top: 0;
+  margin-left: 10px;
+  margin-right: 10px;
   font-size: 16px;
   font-style: bold;
   font-family: Georgia, serif;
@@ -24,7 +25,8 @@
   border-width: 3px;
   border-color: black;
   width: 98%;
-  height: 60px;
+  height: auto;
+  padding: 0;
 }
 
 .Input {
@@ -36,8 +38,8 @@
   margin-bottom: 4px;
   margin-left: 4px;
   margin-right: 4px;
-  width: 42%;
-  height: 50px;
+  width: 97%;
+  height: 60px;
 }
 
 .Label {

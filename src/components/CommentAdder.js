@@ -41,6 +41,7 @@ class CommentAdder extends Component {
     postComment(article_id, { body, username: loggedInUser }).then(
       newComment => {
         this.props.addComment(newComment);
+        this.setState({ body: "" });
       }
     );
   };

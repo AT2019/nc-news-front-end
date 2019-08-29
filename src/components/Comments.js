@@ -27,9 +27,10 @@ class Comments extends Component {
             comments.map(comment => {
               return (
                 <CommentCard
-                  key={comment.id}
+                  key={comment.comment_id}
                   comment={comment}
                   loggedInUser={this.props.loggedInUser}
+                  deleteComment={this.deleteComment}
                 />
               );
             })}

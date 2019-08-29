@@ -1,0 +1,34 @@
+.Pages {
+  display: inline;
+  padding: 0;
+  position: absolute;
+  margin-left: 40%;
+  margin-right: -50%;
+}
+
+.NextPageButton {
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: black;
+  font-family: Georgia, serif;
+  height: 20px;
+  width: 100px;
+}
+
+.PageNum {
+  font-family: Georgia, serif;
+  font-size: 16;
+  text-align: center;
+}
+
+.PrevPageButton {
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: black;
+  font-family: Georgia, serif;
+  height: 20px;
+  width: 100px;
+  padding: 0;
+}

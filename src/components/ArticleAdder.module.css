@@ -1,0 +1,69 @@
+.Title {
+  margin-top: 10px;
+  margin-left: 15px;
+  font-size: 16px;
+  font-style: bold;
+  color: black;
+  font-family: Georgia, serif;
+  background: white;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 3px;
+  border-color: black;
+  width: 97%;
+}
+
+.Dropdown {
+  margin-top: 10px;
+  margin-left: 15px;
+  font-size: 16px;
+  font-style: bold;
+  color: black;
+  font-family: Georgia, serif;
+  background: white;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 3px;
+  border-color: black;
+  width: 45%;
+}
+
+.ArticleText {
+  margin-top: 10px;
+  margin-left: 15px;
+  font-size: 16px;
+  font-style: bold;
+  color: black;
+  width: 97%;
+  min-height: 200px;
+  font-family: Georgia, serif;
+  background: white;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 3px;
+  border-color: black;
+}
+
+.ArticleAdderButton {
+  font-size: 16px;
+  font-style: bold;
+  font-family: Georgia, serif;
+  background: lightgray;
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 3px;
+  border-color: black;
+  margin-right: 0px;
+  width: 45%;
+  overflow: auto;
+  float: right;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  [class*="ArticleAdderButton"] {
+    width: 45%;
+    margin-right: 10px;
+  }
+}

@@ -4,12 +4,12 @@ import styles from "./Articles.module.css";
 import articleBody from "../utils/articleBody";
 import formatDateAppearance from "../utils/formatDateAppearance";
 
-const ArticleCard = ({ article, loggedInUser }) => {
+const ArticleCard = ({ article, loggedInUser, deleteArticle }) => {
   return (
     <div>
       <li className={styles.ListItem}>
         <Link className={styles.Link} to={`/articles/${article.article_id}`}>
-          <h3 className={styles.Text}>{article.title}</h3>
+          <h3 className={styles.TitleText}>{article.title}</h3>
         </Link>
         <Link
           className={styles.BodyLink}
@@ -36,8 +36,9 @@ const ArticleCard = ({ article, loggedInUser }) => {
 
         {loggedInUser === article.author && (
           <button
+            className={styles.DeleteButton}
             type="button"
-            onClick={() => this.deleteArticle(article.article_id)}
+            onClick={() => deleteArticle(article.article_id)}
           >
             Delete My Article
           </button>

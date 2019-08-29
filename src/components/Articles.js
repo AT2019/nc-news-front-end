@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-// import articleBody from "../utils/articleBody";
 import { getArticles, deleteArticleById } from "../api.js";
-// import { Link } from "@reach/router";
 import styles from "./Articles.module.css";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
@@ -9,21 +7,24 @@ import Sorter from "./Sorter";
 import Orderer from "./Orderer";
 import ArticleAdder from "./ArticleAdder";
 import ArticleCard from "./ArticleCard";
-// import formatDateAppearance from "../utils/formatDateAppearance";
+import PageChanger from "./PageChanger";
 
 class Articles extends Component {
   state = {
     articles: null,
     sort: "created_at",
-    order: "desc",
+    order: "asc",
     isLoading: true,
-    err: null
+    err: null,
+    p: 1,
+    totalArticleCount: 0
   };
   render() {
-    const { articles, isLoading, err } = this.state;
+    const { articles, isLoading, err, p, totalArticleCount } = this.state;
+    const updatePage = p * 10;
+    const finalPage = updatePage >= totalArticleCount;
     if (err) return <ErrorPage err={err} />;
     if (isLoading) return <Loading text="Articles are loading..." />;
-
     return (
       <div className={styles.MainDivContainer}>
         <Sorter setSort={this.setSort} />
@@ -37,26 +38,35 @@ class Articles extends Component {
             articles.map(article => {
               return (
                 <ArticleCard
+                  article={article}
                   key={article.article_id}
                   loggedInUser={this.props.loggedInUser}
-                  article={article}
+                  deleteArticle={this.deleteArticle}
                 />
               );
             })}
         </ul>
+        <PageChanger p={p} finalPage={finalPage} setPage={this.setPage} />
       </div>
     );
   }
 
   fetchArticles = () => {
-    getArticles(
-      this.props.author,
-      this.props.topic,
-      this.state.sort,
-      this.state.order
-    )
-      .then(({ articles }) => this.setState({ articles, isLoading: false }))
-      .catch(err => this.setState({ err, isLoading: false }));
+    const { author, topic } = this.props;
+    const { sort, order, p } = this.state;
+    getArticles(author, topic, sort, order, p)
+      .then(({ articles, total_count }) => {
+        this.setState({
+          articles: articles,
+          totalArticleCount: total_count,
+          isLoading: false,
+          err: null,
+          p: p
+        });
+      })
+      .catch(err => {
+        this.setState({ err, isLoading: false });
+      });
   };
 
   setSort = event => {
@@ -66,15 +76,11 @@ class Articles extends Component {
 
   setOrder = event => {
     const { value } = event.target;
-    if (value === "desc") {
-      this.setState({
-        order: "asc"
-      });
-    } else {
-      this.setState({
-        order: "desc"
-      });
-    }
+    this.setState({ order: value });
+  };
+
+  setPage = p => {
+    this.setState({ p: p });
   };
 
   setNewArticle = article => {
@@ -103,12 +109,16 @@ class Articles extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (
-      prevProps.author !== this.props.author ||
       prevProps.topic !== this.props.topic ||
+      prevProps.author !== this.props.author ||
       prevState.sort !== this.state.sort ||
-      prevState.order !== this.state.order
+      prevState.order !== this.state.order ||
+      prevState.p !== this.state.p
     ) {
       this.fetchArticles();
+    }
+    if (prevState.totalArticleCount !== this.state.totalArticleCount) {
+      this.setState({ p: 1 });
     }
   }
 }

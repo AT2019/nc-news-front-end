@@ -2,7 +2,7 @@ import React from "react";
 import Voter from "./Voter";
 import styles from "./Comments.module.css";
 
-const CommentCard = ({ comment, loggedInUser }) => {
+const CommentCard = ({ comment, loggedInUser, deleteComment }) => {
   return (
     <div>
       <ul className={styles.CommentListItem}>
@@ -14,7 +14,7 @@ const CommentCard = ({ comment, loggedInUser }) => {
             <button
               type="button"
               className={styles.Button}
-              onClick={() => this.deleteComment(comment.comment_id)}
+              onClick={() => deleteComment(comment.comment_id)}
             >
               Delete My Comment
             </button>

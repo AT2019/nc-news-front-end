@@ -1,13 +1,13 @@
 NC-News-Front-End
 
-A project used in the NorthCoders News front-end block review sprint, incorporating articles posted by logged in users, the isLoading pattern and error handling methods to catch any user errors. Users logged in to the site are able to post articles and comments, as well as being able to vote on them. The app was written in ReactJS and CSS.
+A project used in the NorthCoders News front-end block review sprint, incorporating articles posted by logged in users, the isLoading pattern and error handling methods to catch any user errors. Users logged in to the site are able to post articles and comments,as well as being able to vote on them. The app was written in ReactJS and CSS.
 
 Built with
 
-- Create React App - Used to bootstrap the app and streamline the creation process
-- Axios - Used to send requests to the backend API
-- Reach/Router - Used for routing the site
-- Jest - Test suite used for unit testing the utility functions
+- Create React App
+- Axios
+- Reach/Router
+- Jest
 
 Getting Started
 The sprint should be forked into your own repository on Github,and then cloned onto your local machine. Once done, in the terminal, type:
@@ -38,7 +38,7 @@ https://github.com/AT2019/nc-news-api
 
 This API has also been deployed and hosted on heroku here:
 
-**_type heroku url_**
+https://nc-newsorama.herokuapp.com/api
 
 Author
 Anke Teale

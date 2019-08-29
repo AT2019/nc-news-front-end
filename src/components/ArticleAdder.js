@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { postArticle } from "../api";
+import styles from "./ArticleAdder.module.css";
 
 class ArticleAdder extends Component {
   state = {
@@ -15,31 +16,30 @@ class ArticleAdder extends Component {
       <>
         <form onSubmit={this.handleAddArticle}>
           <input
+            className={styles.Title}
             type="text"
             placeholder="Title"
             onChange={this.handleTitleChange}
             value={this.state.title}
             required
           />
-          <select onChange={this.handleTopicChange} value={this.state.topic}>
-            <option value="coding">Coding</option>
-            <option value="football">Football</option>
-            <option value="cooking">Cooking</option>
-          </select>
-          {/* <input
-            type="text"
-            placeholder="Topic"
-            onChange={this.handleTopicChange}
-            value={this.state.topic}
-            required
-          /> */}
           <input
-            placeholder="Article Text"
+            className={styles.ArticleText}
+            placeholder="Enter your article here..."
             onChange={this.handleBodyChange}
             value={this.state.body}
             required
           />
-          <button>Add Article</button>
+          <select
+            className={styles.Dropdown}
+            onChange={this.handleTopicChange}
+            value={this.state.topic}
+          >
+            <option value="coding">Coding</option>
+            <option value="football">Football</option>
+            <option value="cooking">Cooking</option>
+          </select>
+          <button className={styles.ArticleAdderButton}>Add Article</button>
         </form>
       </>
     );

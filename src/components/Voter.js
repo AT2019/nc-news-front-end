@@ -11,23 +11,15 @@ class Voter extends Component {
     const { voteModifier, err } = this.state;
     if (err) return <p>Something went wrong...</p>;
     return (
-      <div>
+      <div className={styles.Votes}>
         <p>
-          <button
-            className={styles.Ptag}
-            onClick={() => this.vote(1)}
-            disabled={voteModifier === 1}
-          >
+          <button onClick={() => this.vote(1)} disabled={voteModifier === 1}>
             <span role="img" aria-label="thumbs up">
               👍
             </span>
           </button>
           Votes: {this.props.votes + this.state.voteModifier}
-          <button
-            className={styles.Ptag}
-            onClick={() => this.vote(-1)}
-            disabled={voteModifier === -1}
-          >
+          <button onClick={() => this.vote(-1)} disabled={voteModifier === -1}>
             <span role="img" aria-label="thumbs down">
               👎
             </span>
