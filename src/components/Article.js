@@ -1,6 +1,6 @@
 import React from "react";
-import { getArticleById } from "../api.js";
-import { Link } from "@reach/router";
+import { getArticleById, deleteArticleById } from "../api.js";
+import { Link, navigate } from "@reach/router";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
 import Voter from "./Voter";
@@ -40,6 +40,13 @@ class Article extends React.Component {
             type="article"
           />
           <p className={styles.Ptag}>Comments: {article.comment_count}</p>
+          <button
+            className={styles.DeleteButton}
+            type="button"
+            onClick={() => this.deleteArticle(article.article_id)}
+          >
+            Delete My Article
+          </button>
         </div>
         <Comments
           loggedInUser={this.props.loggedInUser}
@@ -53,6 +60,16 @@ class Article extends React.Component {
     getArticleById(this.props.article_id)
       .then(({ article }) => this.setState({ article, isLoading: false }))
       .catch(err => this.setState({ err, isLoading: false }));
+  };
+
+  deleteArticle = id => {
+    deleteArticleById(id)
+      .then(article => {
+        navigate("/");
+      })
+      .catch(err => {
+        this.setState({ err });
+      });
   };
 
   componentDidMount() {

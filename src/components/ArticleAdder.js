@@ -69,14 +69,7 @@ class ArticleAdder extends Component {
       author: author
     })
       .then(article => {
-        this.props.setNewArticle(article);
         navigate(`/articles/${article.article_id}`);
-        this.setState({
-          title: "",
-          topic: "coding",
-          author: "",
-          body: ""
-        });
       })
       .catch(({ err }) => {
         this.setState({ err });

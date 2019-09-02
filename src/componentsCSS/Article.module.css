@@ -30,6 +30,19 @@
   margin-bottom: 10px;
 }
 
+.DeleteButton {
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: black;
+  margin-top: 2px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  font-family: Georgia, serif;
+  height: 20px;
+  width: 30%;
+}
+
 @media only screen and (max-width: 768px) {
   [class*="Div"] {
     width: 95%;

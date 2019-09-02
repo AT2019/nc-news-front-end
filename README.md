@@ -22,7 +22,7 @@ https://5d67e08fe0c7ae00e2cdad21--nc-newsorama.netlify.com/
 Clone the directory onto your local machine by typing the following into the terminal:
 
 git clone https://github.com/AT2019/nc-news-front-end.git
-cd into the directory 'nc-news-front-end.git'
+cd nc-news-front-end
 
 # Installing
 
