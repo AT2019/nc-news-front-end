@@ -15,11 +15,15 @@ class App extends Component {
     const { loggedInUser } = this.state;
     return (
       <>
-        <Nav />
+        <Nav loggedInUser={loggedInUser} />
         <div className={styles.App}>
           <Router>
             <Articles loggedInUser={loggedInUser} path="/" />
-            <Articles loggedInUser={loggedInUser} path="/topic/:topic" />
+            <Articles
+              loggedInUser={loggedInUser}
+              topic={this.props.topic}
+              path="/topic/:topic"
+            />
             <Articles
               loggedInUser={loggedInUser}
               author={this.props.author}

@@ -31,6 +31,6 @@
 @media only screen and (max-width: 768px) {
   [class*="CommentListItem"] {
     overflow: auto;
-    width: 86%;
+    width: 85%;
   }
 }

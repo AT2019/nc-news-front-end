@@ -25,7 +25,7 @@
   border-radius: 5px;
   border-width: 3px;
   border-color: black;
-  width: 45%;
+  width: 35%;
 }
 
 .ArticleText {
@@ -54,11 +54,20 @@
   border-width: 3px;
   border-color: black;
   margin-right: 0px;
-  width: 45%;
+  width: 35%;
   overflow: auto;
   float: right;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.Label {
+  font-size: 16px;
+  font-style: bold;
+  font-family: Georgia, serif;
+  margin-left: 15px;
+  width: 6%;
+  padding: 0;
 }
 
 @media only screen and (min-width: 768px) {

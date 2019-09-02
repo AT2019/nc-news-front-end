@@ -1,0 +1,10 @@
+.ErrorPage {
+  font-family: Georgia, serif;
+  font-size: 16;
+}
+
+@media only screen and (max-width: 768px) {
+  [class*="ErrorPage"] {
+    margin-top: 250px;
+  }
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "@reach/router";
-import styles from "./Articles.module.css";
+import styles from "../componentsCSS/Articles.module.css";
 import articleBody from "../utils/articleBody";
 import formatDateAppearance from "../utils/formatDateAppearance";
 
@@ -23,6 +23,7 @@ const ArticleCard = ({ article, loggedInUser, deleteArticle }) => {
         <Link className={styles.Link} to={`/authors/${article.author}`}>
           <p className={styles.Text}>Read more articles by {article.author}</p>
         </Link>
+
         <Link className={styles.Link} to={`/topic/${article.topic}`}>
           <p className={styles.Text}>
             Click here for more articles on... {article.topic}

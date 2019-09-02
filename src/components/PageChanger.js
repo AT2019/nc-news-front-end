@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./PageChanger.module.css";
+import styles from "../componentsCSS/PageChanger.module.css";
 
 const PageChanger = props => {
   const { p, finalPage, setPage } = props;

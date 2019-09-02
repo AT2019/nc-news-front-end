@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getArticles, deleteArticleById } from "../api.js";
-import styles from "./Articles.module.css";
+import styles from "../componentsCSS/Articles.module.css";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
 import Sorter from "./Sorter";
@@ -13,7 +13,7 @@ class Articles extends Component {
   state = {
     articles: null,
     sort: "created_at",
-    order: "asc",
+    order: "desc",
     isLoading: true,
     err: null,
     p: 1,
@@ -27,12 +27,15 @@ class Articles extends Component {
     if (isLoading) return <Loading text="Articles are loading..." />;
     return (
       <div className={styles.MainDivContainer}>
-        <Sorter setSort={this.setSort} />
-        <Orderer setOrder={this.setOrder} />
         <ArticleAdder
           author={this.props.loggedInUser}
           setNewArticle={this.setNewArticle}
         />
+        <br />
+        <label className={styles.Label}>Sort articles by: </label>
+        <br />
+        <Sorter onChange={this.handleChange} />
+        <Orderer onChange={this.handleChange} />
         <ul className={styles.List}>
           {articles &&
             articles.map(article => {
@@ -69,14 +72,8 @@ class Articles extends Component {
       });
   };
 
-  setSort = event => {
-    const { value } = event.target;
-    this.setState({ sort: value });
-  };
-
-  setOrder = event => {
-    const { value } = event.target;
-    this.setState({ order: value });
+  handleChange = (text, key) => {
+    this.setState({ [key]: text });
   };
 
   setPage = p => {
@@ -84,8 +81,8 @@ class Articles extends Component {
   };
 
   setNewArticle = article => {
-    this.setState({
-      articles: [article, ...this.state.articles]
+    this.setState(state => {
+      return { articles: [article, ...state.articles] };
     });
   };
 

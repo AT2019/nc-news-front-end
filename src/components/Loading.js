@@ -1,10 +1,17 @@
 import React from "react";
+import Spinner from "react-spinner-material";
+import styles from "../componentsCSS/Loading.module.css";
 
 const Loading = ({ text }) => {
   return (
     <>
-      <div className="spinner" />
-      <p>{text || "Loading..."}</p>
+      <p className={styles.Loading}>{text || "Loading..."}</p>
+      <Spinner
+        size={120}
+        spinnerColor={"#333"}
+        spinnerWidth={2}
+        visible={true}
+      />
     </>
   );
 };

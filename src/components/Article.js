@@ -4,9 +4,8 @@ import { Link } from "@reach/router";
 import Loading from "./Loading";
 import ErrorPage from "./ErrorPage";
 import Voter from "./Voter";
-import styles from "./Article.module.css";
+import styles from "../componentsCSS/Article.module.css";
 import Comments from "./Comments";
-import ArticleAdder from "./ArticleAdder.js";
 
 class Article extends React.Component {
   state = {

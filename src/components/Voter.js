@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { vote } from "../api";
-import styles from "./Voter.module.css";
+import styles from "../componentsCSS/Voter.module.css";
 
 class Voter extends Component {
   state = {

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { navigate } from "@reach/router";
 import { postArticle } from "../api";
-import styles from "./ArticleAdder.module.css";
+import ErrorPage from "./ErrorPage";
+import styles from "../componentsCSS/ArticleAdder.module.css";
 
 class ArticleAdder extends Component {
   state = {
@@ -12,58 +14,63 @@ class ArticleAdder extends Component {
   };
 
   render() {
+    const { title, topic, body, err } = this.state;
+    if (err) return <ErrorPage err={err} />;
     return (
       <>
         <form onSubmit={this.handleAddArticle}>
           <input
             className={styles.Title}
             type="text"
+            id="title"
             placeholder="Title"
-            onChange={this.handleTitleChange}
-            value={this.state.title}
+            onChange={e => this.handleChange(e.target.value, "title")}
+            value={title}
             required
           />
           <input
             className={styles.ArticleText}
+            id="body"
             placeholder="Enter your article here..."
-            onChange={this.handleBodyChange}
-            value={this.state.body}
+            onChange={e => this.handleChange(e.target.value, "body")}
+            value={body}
             required
           />
-          <select
-            className={styles.Dropdown}
-            onChange={this.handleTopicChange}
-            value={this.state.topic}
-          >
-            <option value="coding">Coding</option>
-            <option value="football">Football</option>
-            <option value="cooking">Cooking</option>
-          </select>
-          <button className={styles.ArticleAdderButton}>Add Article</button>
+          <div className={styles.ArticleAdderDivContainer}>
+            <label className={styles.Label}>Topic: </label>
+            <select
+              className={styles.Dropdown}
+              id="topic"
+              onChange={e => this.handleChange(e.target.value, "topic")}
+              value={topic}
+            >
+              <option value="coding">Coding</option>
+              <option value="football">Football</option>
+              <option value="cooking">Cooking</option>
+            </select>
+            <button className={styles.ArticleAdderButton}>Add Article</button>
+          </div>
         </form>
       </>
     );
   }
-  handleTitleChange = event => {
-    this.setState({ title: event.target.value });
+  handleChange = (text, key) => {
+    this.setState({ [key]: text });
   };
-  handleTopicChange = event => {
-    this.setState({ topic: event.target.value });
-  };
-  handleBodyChange = event => {
-    this.setState({ body: event.target.value });
-  };
+
   handleAddArticle = event => {
     event.preventDefault();
+    const { title, topic, body } = this.state;
+    const { author } = this.props;
     postArticle({
-      title: this.state.title,
-      topic: this.state.topic,
-      body: this.state.body,
-      author: this.props.author
+      title: title,
+      topic: topic,
+      body: body,
+      author: author
     })
       .then(article => {
-        console.log(article);
         this.props.setNewArticle(article);
+        navigate(`/articles/${article.article_id}`);
         this.setState({
           title: "",
           topic: "coding",

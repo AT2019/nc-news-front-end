@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { postComment } from "../api";
-import styles from "./CommentAdder.module.css";
+import ErrorPage from "./ErrorPage";
+import styles from "../componentsCSS/CommentAdder.module.css";
 
 class CommentAdder extends Component {
   state = {
-    body: ""
+    body: "",
+    err: null
   };
   render() {
-    const { body } = this.state;
+    const { body, err } = this.state;
+    if (err) return <ErrorPage err={err} />;
     return (
       <form className={styles.Form} onSubmit={this.handleSubmit}>
         <label className={styles.Label} htmlFor="body">
@@ -38,12 +41,12 @@ class CommentAdder extends Component {
     event.preventDefault();
     const { body } = this.state;
     const { loggedInUser, article_id } = this.props;
-    postComment(article_id, { body, username: loggedInUser }).then(
-      newComment => {
+    postComment(article_id, { body, username: loggedInUser })
+      .then(newComment => {
         this.props.addComment(newComment);
         this.setState({ body: "" });
-      }
-    );
+      })
+      .catch(err => this.setState({ err, isLoading: false }));
   };
 }
 

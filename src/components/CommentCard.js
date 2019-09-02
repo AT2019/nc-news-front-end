@@ -1,6 +1,6 @@
 import React from "react";
 import Voter from "./Voter";
-import styles from "./Comments.module.css";
+import styles from "../componentsCSS/Comments.module.css";
 
 const CommentCard = ({ comment, loggedInUser, deleteComment }) => {
   return (
