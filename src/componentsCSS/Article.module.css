@@ -11,12 +11,6 @@
   width: 98%;
 }
 
-.Logo {
-  border-style: solid;
-  border-radius: 5px;
-  margin-left: 10px;
-}
-
 .Ptag {
   margin-left: 10px;
   margin-right: 10px;
@@ -46,6 +40,6 @@
 @media only screen and (max-width: 768px) {
   [class*="Div"] {
     width: 95%;
-    margin-top: 250px;
+    /* margin-top: 260px; */
   }
 }

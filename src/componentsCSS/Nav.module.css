@@ -22,12 +22,19 @@
   top: 0;
   width: 100%;
   overflow: auto;
+  transition: top 0.3s;
 }
 
 @media only screen and (max-width: 768px) {
   [class*="Button"] {
     width: 95%;
     margin-bottom: 10px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  [class*="Nav"] {
+    position: relative;
   }
 }
 
