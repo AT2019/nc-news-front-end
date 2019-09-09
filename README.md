@@ -4,7 +4,7 @@ A project used in the NorthCoders News front-end block review sprint, incorporat
 
 The hosted version of the site can be accessed by clicking on the following link:
 
-https://5d67e08fe0c7ae00e2cdad21--nc-newsorama.netlify.com/
+https://nc-newsorama.netlify.com/
 
 # Dependencies
 
