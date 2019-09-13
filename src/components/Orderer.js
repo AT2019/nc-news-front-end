@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "../componentsCSS/Orderer.module.css";
 
-const Orderer = ({ setOrder }) => {
+const Orderer = ({ onChange }) => {
   return (
     <select
       className={styles.Dropdown}
       id="order"
-      onChange={e => this.handleChange(e.target.value, "order")}
+      onChange={e => onChange(e.target.value, "order")}
     >
       <option id="asc" value="asc">
         Ascending

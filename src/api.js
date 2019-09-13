@@ -37,8 +37,7 @@ export const postComment = (article_id, newComment) => {
     .post(`${baseUrl}/articles/${article_id}/comments`, newComment)
     .then(({ data }) => {
       return data.comment;
-    })
-    .catch(err => console.log(err));
+    });
 };
 
 export const deleteCommentById = id => {
@@ -50,12 +49,9 @@ export const vote = (type, id, increment) => {
 };
 
 export const postArticle = data => {
-  return axios
-    .post(`${baseUrl}/articles`, data)
-    .then(({ data }) => {
-      return data.article;
-    })
-    .catch(err => console.log(err));
+  return axios.post(`${baseUrl}/articles`, data).then(({ data }) => {
+    return data.article;
+  });
 };
 
 export const deleteArticleById = article_id => {

@@ -3,14 +3,14 @@
 }
 
 .App {
-  display: grid;
+  /* display: grid;
   grid-template-rows: 6em 17em;
   grid-template-rows: 6em 17em;
   grid-template-areas:
     "header"
-    "articles";
+    "articles"; */
   margin-bottom: 0px;
-  margin-top: 70px;
+  margin-top: 80px;
   width: 100%;
   height: 100%;
   display: flex;
